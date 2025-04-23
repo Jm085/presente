@@ -39,11 +39,11 @@ h1 {
   transform: translateY(20px);
   box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-  /* Evitar quebra de palavras */
-  white-space: normal;  /* Permite que o texto seja dividido em várias linhas, mas sem quebrar as palavras */
-  overflow: hidden;     /* Impede que o texto ultrapasse o limite do container */
-  text-overflow: ellipsis;  /* Adiciona '...' caso o texto seja muito longo */
+
+  /* Evita quebras de palavras */
+  white-space: nowrap;  /* Não permite quebras de linha, todo o texto ficará em uma linha */
+  overflow: hidden;     /* Oculta qualquer conteúdo extra se necessário */
+  text-overflow: ellipsis; /* Adiciona "..." caso o texto ultrapasse o limite do container */
   box-sizing: border-box;
   text-align: left;
 }
@@ -115,7 +115,7 @@ h1 {
   .motivo {
     font-size: 16px;
     padding: 10px 14px;
-    white-space: normal;  /* Garante que o texto ainda não quebre palavras */
+    white-space: normal;  /* Permite a quebra de linha se necessário, mas sem quebrar as palavras */
   }
 
   #mostrarMais,
