@@ -6,6 +6,7 @@ body {
   padding: 30px 15px;
   overflow-x: hidden;
   position: relative;
+  word-wrap: break-word;
 }
 
 h1 {
@@ -38,12 +39,14 @@ h1 {
   transform: translateY(20px);
   box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-  /* ESSENCIAL para quebrar o texto corretamente */
-  word-break: break-word;
+
+  /* Evita quebra feia de palavras */
+  word-break: normal;
   overflow-wrap: break-word;
   white-space: normal;
+  hyphens: auto; /* quebra inteligente de palavras */
   box-sizing: border-box;
+  text-align: left;
 }
 
 .motivo:hover {
@@ -78,7 +81,7 @@ h1 {
   color: #ff69b4;
   font-size: 24px;
   animation: fall linear forwards;
-  z-index: 1; /* Importante: atrás do conteúdo principal */
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -104,7 +107,7 @@ h1 {
   }
 }
 
-/* Responsividade extra para telas pequenas */
+/* Responsividade para celulares */
 @media (max-width: 480px) {
   h1 {
     font-size: 1.4em;
