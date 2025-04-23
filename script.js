@@ -12,7 +12,7 @@ const motivos = [
   "A forma como você cuida de mim é incomparável.",
   "Eu amo a sua energia positiva.",
   "Estar com você faz tudo valer a pena.",
-  "Eu confio em você completamente.",
+  "Amo receber seus bom dias.",
   "Sua gentileza me encanta a cada dia.",
   "Adoro compartilhar momentos com você.",
   "Você é minha melhor companhia.",
@@ -27,20 +27,31 @@ const motivos = [
   "Eu te amo mais a cada dia."
 ];
 
-let index = 0; // Para controlar até onde vamos na lista de motivos
+let grupoAtual = 0;
+const tamanhoGrupo = 5;
+
 const motivosContainer = document.getElementById("motivos-container");
 const mostrarMaisBtn = document.getElementById("mostrarMais");
 const mostrarMenosBtn = document.getElementById("mostrarMenos");
 
-let ultimoIndex = 0; // Guardando até onde mostramos
+let timeoutIds = []; // Guardar timeouts ativos
 
-// Função para exibir os motivos com efeito de digitação
-function exibirMotivos() {
-  motivosContainer.innerHTML = ""; // Limpa os motivos exibidos
-  let i = ultimoIndex;
+function limparAnimacoes() {
+  timeoutIds.forEach(clearTimeout);
+  timeoutIds = [];
+}
+
+function exibirGrupo() {
+  limparAnimacoes(); // Interrompe qualquer animação anterior
+  motivosContainer.innerHTML = "";
+
+  const inicio = grupoAtual * tamanhoGrupo;
+  const fim = Math.min(inicio + tamanhoGrupo, motivos.length);
+
+  let i = inicio;
 
   function digitarMotivo() {
-    if (i >= index) return;
+    if (i >= fim) return;
 
     const motivo = motivos[i];
     const motivoElement = document.createElement("p");
@@ -53,10 +64,12 @@ function exibirMotivos() {
       if (j < motivo.length) {
         motivoElement.innerHTML += motivo[j] === " " ? "&nbsp;" : motivo[j];
         j++;
-        setTimeout(digitarLetra, 25); // Velocidade de digitação
+        const id = setTimeout(digitarLetra, 20);
+        timeoutIds.push(id);
       } else {
         i++;
-        setTimeout(digitarMotivo, 100); // Tempo entre os motivos
+        const id = setTimeout(digitarMotivo, 100);
+        timeoutIds.push(id);
       }
     }
 
@@ -64,49 +77,28 @@ function exibirMotivos() {
   }
 
   digitarMotivo();
-  ultimoIndex = index; // Atualiza o índice de onde parou
+
+  mostrarMenosBtn.style.display = grupoAtual > 0 ? "inline-block" : "none";
+  mostrarMaisBtn.style.display = fim < motivos.length ? "inline-block" : "none";
 }
 
-// Mostrar mais 5 motivos
-mostrarMaisBtn.addEventListener("click", function () {
-  mostrarMaisBtn.disabled = true;
-  mostrarMenosBtn.disabled = true;
-
-  index = index + 5 <= motivos.length ? index + 5 : motivos.length;
-  exibirMotivos();
-
-  setTimeout(() => {
-    mostrarMaisBtn.disabled = false;
-    mostrarMenosBtn.disabled = false;
-  }, 2000);
-
-  if (index >= motivos.length) {
-    mostrarMaisBtn.style.display = "none"; // Esconde o "Mostrar Mais" se não houver mais motivos
+// Eventos
+mostrarMaisBtn.addEventListener("click", () => {
+  if ((grupoAtual + 1) * tamanhoGrupo < motivos.length) {
+    grupoAtual++;
+    exibirGrupo();
   }
-
-  mostrarMenosBtn.style.display = "inline-block"; // Exibe o botão "Mostrar Menos"
 });
 
-// Mostrar menos 5 motivos
-mostrarMenosBtn.addEventListener("click", function () {
-  // Reseta o índice para o início dos 5 primeiros
-  index = index - 5 >= 5 ? index - 5 : 5;
-  ultimoIndex = index;
-
-  // Exibe novamente os 5 primeiros motivos (limpa o container e reexibe)
-  exibirMotivos();
-
-  // Esconde o botão "Mostrar Menos" se houver 5 ou menos motivos
-  if (index <= 5) {
-    mostrarMenosBtn.style.display = "none";
+mostrarMenosBtn.addEventListener("click", () => {
+  if (grupoAtual > 0) {
+    grupoAtual--;
+    exibirGrupo();
   }
-
-  mostrarMaisBtn.style.display = "inline-block"; // Exibe o botão "Mostrar Mais"
 });
 
-// Inicialização: Sem nenhum motivo visível
-mostrarMaisBtn.style.display = "inline-block";
-mostrarMenosBtn.style.display = "none"; // Começa invisível
+// Inicializa
+exibirGrupo();
 
 // Corações caindo
 function gerarCoracoes() {

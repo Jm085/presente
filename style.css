@@ -1,18 +1,19 @@
-  body {
-      background-color: #fff0f5;
-      color: #ff69b4;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
-      padding: 30px;
-      overflow-x: hidden;
-      position: relative;
-    }
-    
-    h1 {
-      font-size: 2em;
-      margin-bottom: 30px;
-    }
-    
+body {
+  background-color: #fff0f5;
+  color: #ff69b4;
+  font-family: 'Noto Sans', sans-serif; /* Usando a fonte Noto Sans */
+  text-align: center;
+  padding: 30px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-family: 'Noto Sans', sans-serif; /* Fonte aplicada ao título também */
+}
+
     #motivos-container {
       display: block;
       margin: 0 auto;
