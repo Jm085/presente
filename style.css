@@ -1,7 +1,7 @@
 body {
   background-color: #fff0f5;
   color: #ff69b4;
-  font-family: 'Noto Sans', sans-serif; /* Usando a fonte Noto Sans */
+  font-family: 'Noto Sans', sans-serif;
   text-align: center;
   padding: 30px;
   overflow-x: hidden;
@@ -11,80 +11,89 @@ body {
 h1 {
   font-size: 2em;
   margin-bottom: 30px;
-  font-family: 'Noto Sans', sans-serif; /* Fonte aplicada ao título também */
+  font-family: 'Noto Sans', sans-serif;
 }
 
-    #motivos-container {
-      display: block;
-      margin: 0 auto;
-      max-width: 600px; /* opcional: define uma largura máxima */
-    }
-    
-    .motivo {
-      background-color: #ffe0f0;
-      border: 2px solid #ff69b4;
-      border-radius: 12px;
-      padding: 12px 20px;
-      margin: 10px auto;
-      max-width: 90%;
-      font-size: 18px;
-      color: #333;
-      animation: aparecer 0.6s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    
-    .motivo:hover {
-      transform: scale(1.05);
-    }
-    
-    #mostrarMais,
-    #mostrarMenos {
-      margin: 10px;
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      display: inline-block;
-    }
-    
-    #mostrarMais:hover,
-    #mostrarMenos:hover {
-      background-color: #ff1493;
-    }
-    
-    /* Corações caindo */
-    .heart {
-      position: fixed;
-      top: -30px;
-      color: #ff69b4;
-      font-size: 24px;
-      animation: fall linear forwards;
-    }
-    
-    @keyframes aparecer {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(50vh) rotate(180deg) scale(1.2);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg) scale(1);
-        opacity: 0;
-      }
-    }
-    
+#motivos-container {
+  display: block;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.motivo {
+  background-color: #ffe0f0;
+  border: 2px solid #ff69b4;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin: 10px auto;
+  max-width: 90%;
+  font-size: 18px;
+  color: #333;
+  animation: aparecer 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.motivo:hover {
+  transform: scale(1.05);
+}
+
+#mostrarMais,
+#mostrarMenos {
+  margin: 10px;
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+#mostrarMais:hover,
+#mostrarMenos:hover {
+  background-color: #ff1493;
+}
+
+/* Corações caindo */
+.heart {
+  position: fixed;
+  top: -30px;
+  color: #ff69b4;
+  font-size: 24px;
+  animation: fall linear forwards;
+  z-index: 999;
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) scale(1);
+    opacity: 0;
+  }
+}
